@@ -10,6 +10,11 @@ const routes = [
     name: 'index',
     component: () => import('../views/Index.vue')
   },
+  {
+    path: '/404', // Первая, для перекрытия остальных
+    name: '404',
+    component: () => import('../views/HotFound.vue')
+  },
   // {
   //   path: '/:razdel',
   //   name: 'razdel',
@@ -22,6 +27,20 @@ const routes = [
   //   ]
   // },
   {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('../views/Admin.vue'),
+    // ВКЛЮЧИТЬ на продакшине!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login.vue')
+  },
+  {
     path: '/:razdel',
     name: 'razdel',
     component: () => import('../views/Razdel.vue')
@@ -32,23 +51,9 @@ const routes = [
     component: () => import('../views/Page.vue')
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/Login.vue')
-  },
-  {
-    path: '/admin',
-    name: 'admin',
-    component: () => import('../views/Admin.vue'),
-    // ВКЛЮЧИТЬ на продакшине!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
     path: '*',
     name: 'notfound',
-    component: () => import('../views/HotFound.vue')
+    redirect: '/404'
   }
 ]
 

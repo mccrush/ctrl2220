@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col border">
+    <div class="col bg-light">
       <p>Footer</p>
     </div>
   </div>

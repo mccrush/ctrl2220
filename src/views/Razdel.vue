@@ -2,7 +2,18 @@
   <div class="row">
     <div class="col">
       <h1>This is an razdel page</h1>
-      <p>{{$route.params.razdel}}</p>
+      <p>Раздел: {{$route.params.razdel}}</p>
     </div>
   </div>
 </template>
+
+<script>
+import { auth } from "@/main.js";
+
+export default {
+  mounted() {
+    /* Реализовать проверку существования Раздела по алиасу. Иначе редирект на 404 */
+    console.log(auth.currentUser);
+  }
+};
+</script>
