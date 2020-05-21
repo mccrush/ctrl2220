@@ -21,11 +21,11 @@ const routes = [
     component: () => import('../views/Admin.vue'),
     children: [
       {
-        path: '/admin/razdel/:razdel?',
+        path: '/admin/razdel/:id?',
         component: () => import('../compadmin/FormRazdel.vue'),
       },
       {
-        path: '/admin/page/:page?',
+        path: '/admin/page/:id?',
         component: () => import('../compadmin/FormPage.vue'),
       }
     ]
