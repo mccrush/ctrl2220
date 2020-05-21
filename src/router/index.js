@@ -28,11 +28,11 @@ const routes = [
         path: '/admin/page/:id?',
         component: () => import('../compadmin/FormPage.vue'),
       }
-    ]
+    ],
     // ВКЛЮЧИТЬ на продакшине!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // meta: {
-    //   requiresAuth: true
-    // }
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/login',

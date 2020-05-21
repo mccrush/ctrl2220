@@ -32,13 +32,40 @@
             <router-link to="/about" class="nav-link">About</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/admin" class="nav-link">-=Admin=-</router-link>
+            <router-link v-if="!user" to="/login" class="nav-link btn btn-sm btn-light border text-muted">Войти</router-link>
+          </li>
+          <li>
+            <button v-if="user" class="nav-link d-none d-sm-inline btn btn-sm btn-light border text-muted" title="Выйти" @click="logOut">Выйти</button>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </template>
+
+<script>
+import { auth } from "@/main.js";
+
+export default {
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    }
+  },
+  methods: {
+    logOut() {
+      auth
+        .signOut()
+        .then(() => {
+          this.$store.dispatch("logOut");
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+    }
+  }
+};
+</script>
 
 <style scoped>
 #maxwidth {
