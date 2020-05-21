@@ -15,25 +15,14 @@ const routes = [
     name: '404',
     component: () => import('../views/HotFound.vue')
   },
-  // {
-  //   path: '/:razdel',
-  //   name: 'razdel',
-  //   component: () => import('../views/Razdel.vue'),
-  //   children: [
-  //     {
-  //       path: '/:page',
-  //       component: () => import('../views/Page.vue'),
-  //     }
-  //   ]
-  // },
   {
     path: '/admin',
     name: 'admin',
     component: () => import('../views/Admin.vue'),
     // ВКЛЮЧИТЬ на продакшине!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    meta: {
-      requiresAuth: true
-    }
+    // meta: {
+    //   requiresAuth: true
+    // }
   },
   {
     path: '/login',
