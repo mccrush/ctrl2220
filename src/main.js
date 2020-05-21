@@ -4,6 +4,9 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 Vue.config.productionTip = false
 
 import { apiKey } from '../apiKey'
@@ -18,8 +21,21 @@ const firebaseConfig = {
   measurementId: "G-3566KJWVFP"
 };
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+firebase.initializeApp(firebaseConfig);
+export const db = firebase.firestore();
+export const auth = firebase.auth();
+export const storage = firebase.storage();
+
+let app = "";
+firebase.auth().onAuthStateChanged((user) => {
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount('#app')
+  }
+  if (user) {
+    store.dispatch("logIn");
+  }
+})
