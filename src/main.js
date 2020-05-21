@@ -32,6 +32,8 @@ export const db = firebase.firestore();
 export const auth = firebase.auth();
 export const storage = firebase.storage();
 
+store.dispatch("getRazdels");
+
 let app = "";
 firebase.auth().onAuthStateChanged((user) => {
   if (!app) {

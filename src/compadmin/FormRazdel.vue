@@ -42,7 +42,7 @@ export default {
     };
   },
   created() {
-    //console.log("this.$route.params.id =", this.$route.params.id);
+    console.log("this.$route.params.id =", this.$route.params.id);
   },
   mounted() {
     this.title = this.razdel.title;
@@ -79,6 +79,13 @@ export default {
           });
         }
       }
+    }
+  },
+  watch: {
+    $route(to, from) {
+      // обрабатываем изменение параметров маршрута...
+      console.log("Алиас изменен на: ", this.$route.query.alias);
+      //this.razdel();
     }
   }
 };

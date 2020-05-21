@@ -11,6 +11,17 @@ export default new Vuex.Store({
     user: null
   },
   mutations: {
+    getRazdels(state) {
+      db.collection('razdel').get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            state.razdel.push(doc.data());
+          });
+        })
+        .catch((err) => {
+          console.log('Error getting documents', err);
+        });
+    },
     createRazdel(state, razdel) {
       state.razdel.push(razdel);
 
@@ -35,6 +46,9 @@ export default new Vuex.Store({
     createRazdel({ commit }, razdel) {
       commit('createRazdel', razdel)
     },
+    getRazdels({ commit }) {
+      commit('getRazdels')
+    },
     logIn({ commit }) {
       commit('logIn')
     },
@@ -45,6 +59,7 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
+    razdels: state => state.razdel,
     razdelById: state => id => state.razdel.find(razdel => razdel.id === id),
     user: state => state.user
   }
