@@ -15,7 +15,7 @@
 
           <li class="nav-item dropdown">
             <router-link to="/naprav" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Naprav</router-link>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu shadow-sm" aria-labelledby="navbarDropdown">
               <router-link to="/naprav/internet" class="dropdown-item">Internet</router-link>
               <div class="dropdown-divider"></div>
               <router-link to="/naprav/video" class="dropdown-item">Video</router-link>
@@ -40,5 +40,22 @@
 <style scoped>
 #maxwidth {
   max-width: 1130px;
+}
+
+.dropdown-menu {
+  margin-top: -5px;
+  border: none;
+  transition: 0.5s;
+}
+
+@media (min-width: 768px) {
+  .dropdown:hover div.dropdown-menu {
+    display: block;
+  }
+}
+
+.dropdown-item:active {
+  color: #212529;
+  background-color: #f2f2f2;
 }
 </style>
