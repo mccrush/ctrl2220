@@ -1,7 +1,8 @@
 <template>
-  <div class="row">
-    <div class="col bg-light">
-      <p>Footer</p>
+  <div class="row border-top pt-2">
+    <div class="col">
+      Полный контроль
+      <small class="d-block mb-3 text-muted">&copy; 2008 — 2020</small>
     </div>
   </div>
 </template>
