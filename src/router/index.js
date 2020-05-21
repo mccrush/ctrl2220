@@ -19,6 +19,12 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import('../views/Admin.vue'),
+    children: [
+      {
+        path: '/admin/:razdel?/:page?',
+        component: () => import('../compadmin/Edit.vue'),
+      }
+    ]
     // ВКЛЮЧИТЬ на продакшине!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // meta: {
     //   requiresAuth: true
