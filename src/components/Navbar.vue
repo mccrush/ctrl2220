@@ -10,9 +10,17 @@
         <li class="nav-item">
           <router-link to="/reshen" class="nav-link">Reshen</router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/naprav" class="nav-link">Naprav</router-link>
+        <li class="nav-item"></li>
+
+        <li class="nav-item dropdown">
+          <router-link to="/naprav" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Naprav</router-link>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <router-link to="/naprav/internet" class="dropdown-item">Internet</router-link>
+            <div class="dropdown-divider"></div>
+            <router-link to="/naprav/video" class="dropdown-item">Video</router-link>
+          </div>
         </li>
+
         <li class="nav-item">
           <router-link to="/rtsp" class="nav-link">RTSP</router-link>
         </li>
