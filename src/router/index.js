@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import { auth } from "@/main.js";
 
 Vue.use(VueRouter)
 
@@ -39,7 +39,7 @@ const routes = [
   {
     path: '/admin',
     name: 'admin',
-    component: Admin,
+    component: () => import('../views/Admin.vue'),
     // ВКЛЮЧИТЬ на продакшине!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     meta: {
       requiresAuth: true

@@ -8,11 +8,11 @@
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>
-    </div>
 
-    <transition name="fade" mode="out-in">
-      <Footer />
-    </transition>
+      <transition name="fade" mode="out-in">
+        <Footer />
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -37,7 +37,7 @@ export default {
   background: #f2f2f2;
 }
 
-.container {
+#app .container {
   max-width: 1130px;
   background: #fff;
   padding-bottom: 24px;
