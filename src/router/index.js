@@ -21,8 +21,12 @@ const routes = [
     component: () => import('../views/Admin.vue'),
     children: [
       {
-        path: '/admin/:razdel?/:page?',
-        component: () => import('../compadmin/Edit.vue'),
+        path: '/admin/razdel/:razdel?',
+        component: () => import('../compadmin/FormRazdel.vue'),
+      },
+      {
+        path: '/admin/page/:page?',
+        component: () => import('../compadmin/FormPage.vue'),
       }
     ]
     // ВКЛЮЧИТЬ на продакшине!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

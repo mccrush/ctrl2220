@@ -1,9 +1,20 @@
 <template>
   <div class="row">
-    <vueHeadful title="My Title" description="My Desc" />
-    <div class="col">
-      <h1>This is an admin page</h1>
-      <p>Admin Panel</p>
+    <vueHeadful title="Admin" description="Admin panel" />
+    <div class="col-12 border-bottom">
+      <h5 class="pb-2">Admin panel</h5>
+    </div>
+    <div class="col-2 border-right pt-1">
+      <p class="border-bottom pb-2 mb-2">Раздел</p>
+      <router-link to="/admin/razdel" class="btn btn-success btn-sm btn-block">Создать</router-link>
+      <p v-if="!$route.params.razdel">Выберите Раздел</p>
+    </div>
+    <div class="col-2 border-right pt-1">
+      <p class="border-bottom pb-2 mb-2">Страница</p>
+      <router-link to="/admin/page" class="btn btn-success btn-sm btn-block">Создать</router-link>
+      <p v-if="!$route.params.page">Выберите страницу</p>
+    </div>
+    <div class="col-8 pt-1 pb-3">
       <router-view />
     </div>
   </div>
