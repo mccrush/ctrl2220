@@ -1,7 +1,10 @@
 <template>
   <nav class="navbar navbar-expand-sm navbar-light bg-white shadow-sm">
     <div id="maxwidth" class="container-fluid">
-      <router-link to="/" class="navbar-brand">Ctrl22</router-link>
+      <router-link class="navbar-brand fw700" to="/">
+        <img src="/logo.png" height="30" class="align-text-top mr-2" alt="Полный контроль" />
+        Полный контроль
+      </router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
