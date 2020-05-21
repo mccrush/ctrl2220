@@ -9,6 +9,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 Vue.config.productionTip = false
 
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore"; // DB
+import "firebase/storage"; // File
+
 import { apiKey } from '../apiKey'
 const firebaseConfig = {
   apiKey,
