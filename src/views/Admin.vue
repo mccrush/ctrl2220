@@ -24,7 +24,8 @@
     <div class="col-2 border-right pt-1">
       <router-link :to="'/admin/'+this.$route.params.razdel+'/page'" class="btn btn-success btn-sm btn-block mt-1">Создать</router-link>
       <div class="list-group list-group-flush mt-1">
-        <LoadIcon v-if="!pages.length" class="m-auto" />
+        <!-- <LoadIcon v-if="!pages.length" class="m-auto" /> -->
+        <p>Выберите раздел</p>
         <router-link v-for="(page, index) in pages" :key="'pag'+index" :to="'/admin/'+this.$route.params.razdel+'/page/'+pages.id" class="list-group-item list-group-item-action p-1">{{page.title}}</router-link>
       </div>
     </div>

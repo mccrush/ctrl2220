@@ -24,6 +24,13 @@ export default {
   components: {
     Navbar,
     Footer
+  },
+  mounted() {
+    // this.$store.dispatch("getRazdels");
+    // this.$store.dispatch("getPages", "naprav");
+    // this.$store.dispatch("getPages", "reshen");
+    // this.$store.dispatch("getPages", "vid_naprav");
+    // this.$store.dispatch("getPages", "about");
   }
 };
 </script>
