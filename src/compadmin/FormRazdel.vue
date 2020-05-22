@@ -35,6 +35,7 @@
 export default {
   data() {
     return {
+      id: this.$route.params.id,
       title: "",
       alias: "",
       posmenu: null,
@@ -42,26 +43,28 @@ export default {
     };
   },
   created() {
-    console.log("this.$route.params.id =", this.$route.params.id);
+    //console.log("this.$route.params.id =", this.$route.params.id);
   },
   mounted() {
-    this.title = this.razdel.title;
-    this.alias = this.razdel.alias;
-    this.posmenu = this.razdel.posmenu;
-    this.active = this.razdel.active;
+    this.getValue();
   },
   computed: {
     razdel() {
-      //return this.$store.getters.razdelById(this.$route.params.id);
-      return this.$route.params.id !== undefined
-        ? this.$store.getters.razdelById(this.$route.params.id)
+      return this.id !== undefined
+        ? this.$store.getters.razdelById(this.id)
         : { title: "", alias: "", posmenu: null, active: true };
     }
   },
   methods: {
+    getValue() {
+      this.title = this.razdel.title;
+      this.alias = this.razdel.alias;
+      this.posmenu = this.razdel.posmenu;
+      this.active = this.razdel.active;
+    },
     saveChange() {
       if (this.title.trim() && this.alias.trim()) {
-        if (this.$route.params.id) {
+        if (this.id) {
           this.$store.dispatch("updateRazdel", {
             id: this.$route.params.id,
             title: this.title,
@@ -83,9 +86,8 @@ export default {
   },
   watch: {
     $route(to, from) {
-      // обрабатываем изменение параметров маршрута...
-      console.log("Алиас изменен на: ", this.$route.query.alias);
-      //this.razdel();
+      this.id = this.$route.params.id;
+      this.getValue();
     }
   }
 };

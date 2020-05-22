@@ -8,7 +8,7 @@
       <p class="border-bottom pb-2 mb-2">Раздел</p>
       <router-link to="/admin/razdel" class="btn btn-success btn-sm btn-block">Создать</router-link>
       <div class="list-group list-group-flush">
-        <router-link v-for="(razdel, index) in razdels" :key="'raz'+index" :to="'/admin/razdel/'+razdel.id+'?alias='+razdel.alias" class="list-group-item list-group-item-action p-1">{{razdel.title}}</router-link>
+        <router-link v-for="(razdel, index) in razdels" :key="'raz'+index" :to="'/admin/'+razdel.alias+'/'+razdel.id" class="list-group-item list-group-item-action p-1">{{razdel.title}}</router-link>
       </div>
     </div>
     <div class="col-2 border-right pt-1">

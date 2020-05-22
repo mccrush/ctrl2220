@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    razdel: [{ id: '123', title: 'Test Razdel', alias: "testalias", posmenu: 5 }],
+    razdel: [],
     user: null
   },
   mutations: {
