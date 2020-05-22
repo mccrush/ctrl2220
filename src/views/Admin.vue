@@ -13,7 +13,7 @@
     </div>
     <div class="col-2 border-right pt-1">
       <p class="border-bottom pb-2 mb-2">Страница</p>
-      <router-link to="/admin/page" class="btn btn-success btn-sm btn-block">Создать</router-link>
+      <router-link :to="'/admin/'+this.$route.params.razdel+'/page'" class="btn btn-success btn-sm btn-block">Создать</router-link>
       <p v-if="!$route.params.page">Выберите страницу</p>
     </div>
     <div class="col-8 pt-1 pb-3">

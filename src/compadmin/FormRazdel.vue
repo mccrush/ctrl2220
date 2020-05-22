@@ -22,7 +22,7 @@
       <div class="col-3">
         <div class="form-group form-check mt-4">
           <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="active" />
-          <label class="form-check-label" for="exampleCheck1">Активен</label>
+          <label class="form-check-label" for="exampleCheck1">В меню</label>
         </div>
       </div>
     </div>

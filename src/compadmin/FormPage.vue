@@ -1,23 +1,94 @@
 <template>
-  <form>
-    <h4>Form Page</h4>
+  <form @submit.prevent="saveChange">
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <label for="title">Название страницы</label>
+      <input type="text" class="form-control form-control-sm" id="title" v-model="title" />
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" />
+
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="alias">Алиас</label>
+          <input type="text" class="form-control form-control-sm" id="alias" aria-describedby="aliasHelp" v-model="alias" />
+          <small id="aliasHelp" class="form-text text-muted">Латинскими символами, с маленькой буквы, без пробелов и дефисов</small>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="posmenu">Позиция в меню</label>
+          <input type="number" class="form-control form-control-sm" id="posmenu" min="1" max="99" step="1" v-model="posmenu" />
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group form-check mt-4">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="active" />
+          <label class="form-check-label" for="exampleCheck1">В меню</label>
+        </div>
+      </div>
     </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <button type="submit" class="btn btn-primary btn-sm float-right" :class="{disabled: !title.length || !alias.length}">Сохранить</button>
   </form>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      id: this.$route.params.id,
+      title: "",
+      alias: "",
+      posmenu: null,
+      active: true
+    };
+  },
+  created() {
+    //console.log("this.$route.params.id =", this.$route.params.id);
+  },
+  mounted() {
+    this.getValue();
+  },
+  computed: {
+    page() {
+      return this.id !== undefined
+        ? this.$store.getters.pageById(this.id)
+        : { title: "", alias: "", posmenu: null, active: true };
+    }
+  },
+  methods: {
+    getValue() {
+      this.title = this.page.title;
+      this.alias = this.page.alias;
+      this.posmenu = this.page.posmenu;
+      this.active = this.page.active;
+    },
+    saveChange() {
+      if (this.title.trim() && this.alias.trim()) {
+        if (this.id) {
+          this.$store.dispatch("updatePage", {
+            id: this.$route.params.id,
+            title: this.title,
+            alias: this.alias,
+            posmenu: +this.posmenu,
+            active: this.active
+          });
+        } else {
+          this.$store.dispatch("createPage", {
+            id: Date.now().toString(),
+            title: this.title,
+            alias: this.alias,
+            posmenu: +this.posmenu,
+            active: this.active
+          });
+        }
+      }
+    }
+  },
+  watch: {
+    $route(to, from) {
+      this.id = this.$route.params.id;
+      this.getValue();
+    }
+  }
+};
 </script>
