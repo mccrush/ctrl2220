@@ -5,7 +5,7 @@ export default {
     razdel: []
   },
   mutations: {
-    getRazdels(state) {
+    getItem(state) {
       db.collection('razdel').get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
@@ -13,25 +13,25 @@ export default {
           });
         })
         .catch((err) => {
-          console.log('Error getting documents', err);
+          console.log('Error getting documents razdel', err);
         });
     },
-    createRazdel(state, razdel) {
+    createItem(state, razdel) {
       state.razdel.push(razdel);
 
       db.collection('razdel')
         .doc(razdel.id)
         .set(razdel)
-        .then(() => { console.log("Document successfully written!"); })
-        .catch(err => { console.error("Error writing document: ", err) });
+        .then(() => { console.log("Document successfully written! razdel"); })
+        .catch(err => { console.error("Error writing document razdel: ", err) });
     }
   },
   actions: {
-    createRazdel({ commit }, razdel) {
-      commit('createRazdel', razdel)
+    createItem({ commit }, razdel) {
+      commit('createItem', razdel)
     },
     getRazdels({ commit }) {
-      commit('getRazdels')
+      commit('getItem')
     }
   },
   getters: {
