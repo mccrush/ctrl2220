@@ -12,11 +12,11 @@ export default {
       db.collection('naprav').get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
-            state.naprav.push(doc.data());
+            state[page.razdel].push(doc.data());
           });
         })
         .catch((err) => {
-          console.log('Error getting documents naprav', err);
+          console.log('Error getting documents page', err);
         });
     },
     createPage(state, page) {
@@ -25,8 +25,8 @@ export default {
       db.collection(page.razdel)
         .doc(page.id)
         .set(page)
-        .then(() => { console.log("Document successfully written! naprav"); })
-        .catch(err => { console.error("Error writing document naprav: ", err) });
+        .then(() => { console.log("Document successfully written! page"); })
+        .catch(err => { console.error("Error writing document page: ", err) });
     }
   },
   actions: {

@@ -28,6 +28,17 @@
     </div>
 
     <button type="submit" class="btn btn-primary btn-sm float-right" :class="{disabled: !title.length || !alias.length}">Сохранить</button>
+
+    <transition name="fade" mode="out-in">
+      <h5 id="success" v-if="success">
+        <span class="badge badge-success">Success</span>
+      </h5>
+    </transition>
+    <transition name="fade" mode="out-in">
+      <h5 id="error" v-if="error">
+        <span class="badge badge-danger">Error</span>
+      </h5>
+    </transition>
   </form>
 </template>
 
@@ -40,7 +51,9 @@ export default {
       alias: "",
       description: "",
       posmenu: null,
-      active: true
+      active: true,
+      success: false,
+      error: false
     };
   },
   created() {
@@ -82,6 +95,7 @@ export default {
             active: this.active,
             razdel: this.$route.params.razdel
           });
+          this.showSuccess();
         } else {
           this.$store.dispatch("createPage", {
             id: Date.now().toString(),
@@ -92,8 +106,21 @@ export default {
             active: this.active,
             razdel: this.$route.params.razdel
           });
+          this.showSuccess();
         }
       }
+    },
+    showSuccess() {
+      this.success = true;
+      setTimeout(() => {
+        this.success = false;
+      }, 3000);
+    },
+    showError() {
+      this.error = true;
+      setTimeout(() => {
+        this.error = false;
+      }, 3000);
     }
   },
   watch: {
@@ -104,3 +131,19 @@ export default {
   }
 };
 </script>
+<style scoped>
+#success,
+#error {
+  position: fixed;
+  top: 10px;
+  right: 15px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
+</style>
