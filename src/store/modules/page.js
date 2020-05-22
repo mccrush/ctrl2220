@@ -8,11 +8,11 @@ export default {
     about: []
   },
   mutations: {
-    getItem(state) {
-      db.collection('naprav').get()
+    getPages(state, razdel) {
+      db.collection(razdel).get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
-            state[page.razdel].push(doc.data());
+            state[razdel].push(doc.data());
           });
         })
         .catch((err) => {
@@ -33,12 +33,15 @@ export default {
     createPage({ commit }, page) {
       commit('createPage', page)
     },
-    getPage({ commit }) {
-      commit('getItem')
+    getPages({ commit }, razdel) {
+      commit('getPages', razdel)
     }
   },
   getters: {
-    napravs: state => state.naprav,
-    napravById: state => id => state.naprav.find(naprav => naprav.id === id)
+    napravById: state => id => state.naprav.find(naprav => naprav.id === id),
+    naprav: state => state.naprav,
+    reshen: state => state.reshen,
+    vid_naprav: state => state.vid_naprav,
+    about: state => state.about
   }
 }

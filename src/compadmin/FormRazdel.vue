@@ -4,7 +4,6 @@
       <label for="title">Название раздела</label>
       <input type="text" class="form-control form-control-sm" id="title" v-model="title" />
     </div>
-
     <div class="row">
       <div class="col-6">
         <div class="form-group">
@@ -27,7 +26,7 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-sm float-right" :class="{disabled: !title.length || !alias.length}">Сохранить</button>
+    <button type="submit" class="btn btn-primary btn-sm float-right">Сохранить</button>
   </form>
 </template>
 
@@ -35,7 +34,7 @@
 export default {
   data() {
     return {
-      id: this.$route.params.id,
+      //id: this.$route.params.id,
       title: "",
       alias: "",
       posmenu: null,
@@ -44,19 +43,22 @@ export default {
   },
   created() {
     //console.log("this.$route.params.id =", this.$route.params.id);
+    //console.log("this.razdel =", this.razdel);
   },
   mounted() {
     this.getValue();
   },
   computed: {
     razdel() {
-      return this.id !== undefined
-        ? this.$store.getters.razdelById(this.id)
-        : { title: "", alias: "", posmenu: null, active: true };
+      return this.$store.getters.razdelById(this.$route.params.id);
+      // return this.id !== undefined
+      //   ? this.$store.getters.razdelById(this.id)
+      //   : { title: "", alias: "", posmenu: null, active: true };
     }
   },
   methods: {
     getValue() {
+      //console.log("this.id =", this.id);
       this.title = this.razdel.title;
       this.alias = this.razdel.alias;
       this.posmenu = this.razdel.posmenu;
@@ -86,7 +88,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      this.id = this.$route.params.id;
+      //this.id = to.params.id;
       this.getValue();
     }
   }
