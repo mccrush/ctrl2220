@@ -6,7 +6,7 @@
       v-for="(razdel, index) in razdels"
       :key="'raz'+index"
       class="list-group-item list-group-item-action p-1"
-      :class="{selected: razdel.id === id}"
+      :class="{selected: razdel.id === currentId}"
       @click="$emit('select-razdel', {id: razdel.id, alias: razdel.alias})"
     >{{razdel.title}}</button>
   </div>
@@ -19,11 +19,9 @@ export default {
   components: {
     LoadIcon
   },
-  props: ['id'],
-  computed: {
-    razdels() {
-      return this.$store.getters.razdels
-    }
+  props: {
+    razdels: Array,
+    currentId: String
   }
 }
 </script>

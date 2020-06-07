@@ -3,9 +3,9 @@ import { db } from "@/main.js";
 export default {
   state: {
     napravs: [],
-    reshen: [],
-    vid_naprav: [],
-    about: []
+    reshens: [],
+    vid_napravs: [],
+    abouts: []
   },
   mutations: {
     getPages(state, razdel) {
@@ -40,8 +40,8 @@ export default {
   getters: {
     napravById: state => id => state.naprav.find(naprav => naprav.id === id),
     napravs: state => state.napravs,
-    reshen: state => state.reshen,
-    vid_naprav: state => state.vid_naprav,
-    about: state => state.about
+    reshens: state => state.reshens,
+    vid_napravs: state => state.vid_napravs,
+    abouts: state => state.abouts
   }
 }
