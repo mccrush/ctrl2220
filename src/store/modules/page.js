@@ -2,7 +2,7 @@ import { db } from "@/main.js";
 
 export default {
   state: {
-    naprav: [],
+    napravs: [],
     reshen: [],
     vid_naprav: [],
     about: []
@@ -39,7 +39,7 @@ export default {
   },
   getters: {
     napravById: state => id => state.naprav.find(naprav => naprav.id === id),
-    naprav: state => state.naprav,
+    napravs: state => state.napravs,
     reshen: state => state.reshen,
     vid_naprav: state => state.vid_naprav,
     about: state => state.about

@@ -4,24 +4,26 @@
     <div class="col-12 border-bottom border-top">
       <div class="row">
         <div class="col-2 border-right">
-          <h5 class="mt-2">Раздел</h5>
+          <h6 class="text-center mt-2">Раздел</h6>
         </div>
         <div class="col-2 border-right">
-          <h5 class="mt-2">Элемент</h5>
+          <h6 class="text-center mt-2">Элемент</h6>
         </div>
-        <div class="col-8">
-          <h4 class="mt-2">Панель администратора</h4>
-        </div>
+        <div class="col-8"></div>
       </div>
     </div>
 
     <div class="col-2 border-right pt-1">
-      <button class="btn btn-success btn-sm btn-block mt-1">Создать</button>
+      <button class="btn btn-success btn-sm btn-block mt-1" @click="createRazdel">Создать</button>
       <ListRazdel @select-razdel="selectRazdel" :id="selectRazdelId" />
     </div>
     <div class="col-2 border-right pt-1">
       <button class="btn btn-success btn-sm btn-block mt-1">Создать</button>
-      <ListElement @select-element="selectElement" :id="selectElementId" />
+      <ListElement
+        @select-element="selectElement"
+        :id="selectElementId"
+        :razdelAlias="razdelAlias"
+      />
     </div>
     <div class="col-8 pt-1 pb-3">
       <router-view />
@@ -43,7 +45,8 @@ export default {
   data() {
     return {
       selectRazdelId: '',
-      selectElementId: ''
+      selectElementId: '',
+      razdelAlias: ''
     }
   },
   mounted() {
@@ -67,6 +70,7 @@ export default {
   methods: {
     selectRazdel({ id, alias }) {
       this.selectRazdelId = id
+      this.razdelAlias = alias
       localStorage.setItem('selectRazdelId', id)
       console.log('Select razdel: id=', id, ', alias=', alias)
     },
@@ -74,11 +78,16 @@ export default {
       this.selectElementId = id
       localStorage.setItem('selectElementId', id)
       console.log('Select razdel: id=', id, ', alias=', alias)
+    },
+    createRazdel() {
+      this.selectRazdelId = ''
+      localStorage.setItem('selectRazdelId', '')
     }
   },
   watch: {
-    // $route(to, from) {
-    //   this.getPages(to.params.razdel)
+    // selectRazdelId() {
+    //   if (this.selectRazdelId) {
+    //   }
     // }
   }
 }

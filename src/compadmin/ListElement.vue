@@ -21,13 +21,20 @@ export default {
     LoadIcon
   },
   props: {
-    elements: {
-      type: Array,
-      default() {
-        return []
+    id: String,
+    razdelAlias: String
+  },
+  data() {
+    return {
+      elements: []
+    }
+  },
+  watch: {
+    razdelAlias() {
+      if (this.razdelAlias) {
+        this.elements = this.$store.getters[this.razdelAlias]
       }
-    },
-    id: String
+    }
   }
 }
 </script>
