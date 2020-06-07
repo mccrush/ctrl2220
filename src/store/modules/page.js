@@ -38,7 +38,7 @@ export default {
     }
   },
   getters: {
-    napravById: state => id => state.naprav.find(naprav => naprav.id === id),
+    napravById: state => id => state.napravs.find(naprav => naprav.id === id),
     napravs: state => state.napravs,
     reshens: state => state.reshens,
     vid_napravs: state => state.vid_napravs,

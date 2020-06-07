@@ -5,7 +5,7 @@
       type="button"
       v-for="(razdel, index) in razdels"
       :key="'raz'+index"
-      class="list-group-item list-group-item-action p-1"
+      class="list-group-item list-group-item-action p-1 border-0"
       :class="{selected: razdel.id === currentId}"
       @click="$emit('select-razdel', {id: razdel.id, alias: razdel.alias})"
     >{{razdel.title}}</button>

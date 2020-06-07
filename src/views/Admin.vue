@@ -17,13 +17,13 @@
       </div>
     </div>
 
-    <div class="col-2 border-right pt-1">
-      <button class="btn btn-success btn-sm btn-block mt-1" @click="createRazdel">Создать</button>
+    <div class="col-2 border-right p-0">
+      <button class="btn btn-success btn-sm btn-block rounded-0" @click="createRazdel">Создать</button>
       <ListRazdel @select-razdel="selectRazdel" :currentId="selectRazdelId" :razdels="razdels" />
     </div>
-    <div class="col-2 border-right pt-1">
+    <div class="col-2 border-right p-0">
       <div v-if="elements.length">
-        <button class="btn btn-success btn-sm btn-block mt-1" @click="createElement">Создать</button>
+        <button class="btn btn-success btn-sm btn-block rounded-0" @click="createElement">Создать</button>
         <ListElement
           @select-element="selectElement"
           :currentId="selectElementId"
@@ -31,8 +31,11 @@
         />
       </div>
     </div>
-    <div class="col-8 pt-1 pb-3">
-      <router-view />
+    <div class="col-8 pt-3 pb-3">
+      <FormNaprav
+        v-if="selectRazdelAlias === 'napravs' && (mode === 'create' || selectElementId)"
+        :element="element"
+      />
     </div>
   </div>
 </template>
@@ -41,19 +44,22 @@
 import vueHeadful from 'vue-headful'
 import ListRazdel from '@/compadmin/ListRazdel'
 import ListElement from '@/compadmin/ListElement'
+import FormNaprav from '@/compadmin/FormNaprav'
 
 export default {
   components: {
     vueHeadful,
     ListRazdel,
-    ListElement
+    ListElement,
+    FormNaprav
   },
   data() {
     return {
       selectRazdelId: '',
-      selectElementId: '',
       selectRazdelAlias: '',
+      selectElementId: '',
       elements: [],
+      element: null,
       mode: 'create'
     }
   },
@@ -61,12 +67,15 @@ export default {
     this.selectRazdelId = localStorage.getItem('selectRazdelId') || ''
     this.selectRazdelAlias = localStorage.getItem('selectRazdelAlias') || ''
     if (this.selectRazdelAlias) {
+      this.mode = 'edit'
       this.elements = this.$store.getters[this.selectRazdelAlias]
       this.selectElementId = localStorage.getItem('selectElementId') || ''
-      this.mode = 'edit'
+      if (this.selectElementId) {
+        this.getElement()
+      }
     } else {
-      this.selectElementId = ''
       this.mode = 'create'
+      this.selectElementId = ''
     }
   },
   computed: {
@@ -75,17 +84,38 @@ export default {
     }
   },
   methods: {
+    getElement() {
+      console.log('From getElement()')
+
+      // Настроить работу асинхронности
+      // чтобы значения в форму подставлялись после загрузки с сервера
+      switch (this.selectRazdelAlias) {
+        case 'napravs':
+          this.element = this.$store.getters.napravById(this.selectElementId)
+          break
+        case 'razdels':
+          this.element = this.$store.getters.razdelById(this.selectElementId)
+          break
+        default:
+          this.element = null
+      }
+    },
     selectRazdel({ id, alias }) {
+      this.elements = this.$store.getters[alias]
       this.selectRazdelId = id
-      this.selectRazdelAlias = alias
       localStorage.setItem('selectRazdelId', id)
+      this.selectRazdelAlias = alias
       localStorage.setItem('selectRazdelAlias', alias)
+      this.selectElementId = ''
+      localStorage.setItem('selectElementId', '')
       this.mode = 'edit'
     },
     selectElement({ id, alias }) {
       this.selectElementId = id
       localStorage.setItem('selectElementId', id)
       this.mode = 'edit'
+
+      this.getElement()
     },
     createRazdel() {
       this.elements = []
@@ -99,15 +129,16 @@ export default {
       this.selectElementId = ''
       localStorage.setItem('selectElementId', '')
       this.mode = 'create'
-    }
-  },
-  watch: {
-    selectRazdelAlias() {
-      if (this.selectRazdelAlias) {
-        this.elements = this.$store.getters[this.selectRazdelAlias]
-      }
+      this.element = null
     }
   }
+  // watch: {
+  //   selectRazdelAlias() {
+  //     if (this.selectRazdelAlias) {
+  //       this.elements = this.$store.getters[this.selectRazdelAlias]
+  //     }
+  //   }
+  // }
 }
 </script>
 
