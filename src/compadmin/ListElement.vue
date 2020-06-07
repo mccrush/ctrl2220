@@ -1,12 +1,14 @@
 <template>
   <div class="list-group list-group-flush mt-1">
     <!-- <LoadIcon v-if="!elements.length" class="m-auto" /> -->
-    <p>Выберите раздел</p>
+    <p>Сначала выберите раздел</p>
     <button
       type="button"
       v-for="(element, index) in elements"
       :key="'pag'+index"
+      :class="{selected: element.id === id}"
       class="list-group-item list-group-item-action p-1"
+      @click="$emit('select-element', {id: element.id, alias: element.alias})"
     >{{element.title}}</button>
   </div>
 </template>
@@ -14,5 +16,24 @@
 <script>
 import LoadIcon from '@/components/LoadIcon.vue'
 
-export default {}
+export default {
+  components: {
+    LoadIcon
+  },
+  props: {
+    elements: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    id: String
+  }
+}
 </script>
+
+<style scoped>
+.selected {
+  background-color: #ffc107;
+}
+</style>

@@ -15,7 +15,7 @@ import "firebase/auth";
 import "firebase/firestore"; // DB
 import "firebase/storage"; // File
 
-import { apiKey } from '../apiKey'
+import apiKey from '../apiKey'
 const firebaseConfig = {
   apiKey,
   authDomain: "site-237c4.firebaseapp.com",

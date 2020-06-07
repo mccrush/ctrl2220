@@ -17,11 +17,11 @@
 
     <div class="col-2 border-right pt-1">
       <button class="btn btn-success btn-sm btn-block mt-1">Создать</button>
-      <ListRazdel @select-razdel="selectRazdel" />
+      <ListRazdel @select-razdel="selectRazdel" :id="selectRazdelId" />
     </div>
     <div class="col-2 border-right pt-1">
       <button class="btn btn-success btn-sm btn-block mt-1">Создать</button>
-      <ListElement />
+      <ListElement @select-element="selectElement" :id="selectElementId" />
     </div>
     <div class="col-8 pt-1 pb-3">
       <router-view />
@@ -42,11 +42,13 @@ export default {
   },
   data() {
     return {
-      pages: []
+      selectRazdelId: '',
+      selectElementId: ''
     }
   },
-  created() {
-    //console.log("razdels = ", this.razdels);
+  mounted() {
+    this.selectRazdelId = localStorage.getItem('selectRazdelId') || ''
+    this.selectElementId = localStorage.getItem('selectElementId') || ''
   },
   // computed: {
   //   naprav() {
@@ -63,7 +65,14 @@ export default {
   //   }
   // },
   methods: {
-    selectRazdel(id, alias) {
+    selectRazdel({ id, alias }) {
+      this.selectRazdelId = id
+      localStorage.setItem('selectRazdelId', id)
+      console.log('Select razdel: id=', id, ', alias=', alias)
+    },
+    selectElement({ id, alias }) {
+      this.selectElementId = id
+      localStorage.setItem('selectElementId', id)
       console.log('Select razdel: id=', id, ', alias=', alias)
     }
   },
