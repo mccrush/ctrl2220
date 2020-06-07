@@ -2,14 +2,14 @@ import { db } from "@/main.js";
 
 export default {
   state: {
-    razdel: []
+    razdels: []
   },
   mutations: {
     getItem(state) {
-      db.collection('razdel').get()
+      db.collection('razdels').get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
-            state.razdel.push(doc.data());
+            state.razdels.push(doc.data());
           });
         })
         .catch((err) => {
@@ -35,7 +35,7 @@ export default {
     }
   },
   getters: {
-    razdels: state => state.razdel,
-    razdelById: state => id => state.razdel.find(razdel => razdel.id === id)
+    razdels: state => state.razdels,
+    razdelById: state => id => state.razdels.find(razdel => razdel.id === id)
   }
 }

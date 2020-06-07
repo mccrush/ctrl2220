@@ -7,27 +7,21 @@
           <h5 class="mt-2">Раздел</h5>
         </div>
         <div class="col-2 border-right">
-          <h5 class="mt-2">Страница</h5>
+          <h5 class="mt-2">Элемент</h5>
         </div>
         <div class="col-8">
           <h4 class="mt-2">Панель администратора</h4>
         </div>
       </div>
     </div>
+
     <div class="col-2 border-right pt-1">
-      <router-link to="/admin/razdel" class="btn btn-success btn-sm btn-block mt-1">Создать</router-link>
-      <div class="list-group list-group-flush mt-1">
-        <LoadIcon v-if="!razdels.length" class="m-auto" />
-        <router-link v-for="(razdel, index) in razdels" :key="'raz'+index" :to="'/admin/'+razdel.alias+'/'+razdel.id" class="list-group-item list-group-item-action p-1">{{razdel.title}}</router-link>
-      </div>
+      <button class="btn btn-success btn-sm btn-block mt-1">Создать</button>
+      <ListRazdel @select-razdel="selectRazdel" />
     </div>
     <div class="col-2 border-right pt-1">
-      <router-link :to="'/admin/'+this.$route.params.razdel+'/page'" class="btn btn-success btn-sm btn-block mt-1">Создать</router-link>
-      <div class="list-group list-group-flush mt-1">
-        <!-- <LoadIcon v-if="!pages.length" class="m-auto" /> -->
-        <p>Выберите раздел</p>
-        <router-link v-for="(page, index) in pages" :key="'pag'+index" :to="'/admin/'+this.$route.params.razdel+'/page/'+pages.id" class="list-group-item list-group-item-action p-1">{{page.title}}</router-link>
-      </div>
+      <button class="btn btn-success btn-sm btn-block mt-1">Создать</button>
+      <ListElement />
     </div>
     <div class="col-8 pt-1 pb-3">
       <router-view />
@@ -36,51 +30,49 @@
 </template>
 
 <script>
-import vueHeadful from "vue-headful";
-import LoadIcon from "@/components/LoadIcon.vue";
+import vueHeadful from 'vue-headful'
+import ListRazdel from '@/compadmin/ListRazdel'
+import ListElement from '@/compadmin/ListElement'
 
 export default {
   components: {
     vueHeadful,
-    LoadIcon
+    ListRazdel,
+    ListElement
   },
   data() {
     return {
       pages: []
-    };
+    }
   },
   created() {
     //console.log("razdels = ", this.razdels);
   },
-  computed: {
-    razdels() {
-      return this.$store.getters.razdels;
-    },
-    naprav() {
-      return this.$store.getters.naprav;
-    },
-    reshen() {
-      return this.$store.getters.reshen;
-    },
-    vid_naprav() {
-      return this.$store.getters.vid_naprav;
-    },
-    about() {
-      return this.$store.getters.about;
-    }
-  },
+  // computed: {
+  //   naprav() {
+  //     return this.$store.getters.naprav
+  //   },
+  //   reshen() {
+  //     return this.$store.getters.reshen
+  //   },
+  //   vid_naprav() {
+  //     return this.$store.getters.vid_naprav
+  //   },
+  //   about() {
+  //     return this.$store.getters.about
+  //   }
+  // },
   methods: {
-    getPages(razdel) {
-      console.log("razdel", razdel);
-      //this.pages = this(razdel);
+    selectRazdel(id, alias) {
+      console.log('Select razdel: id=', id, ', alias=', alias)
     }
   },
   watch: {
-    $route(to, from) {
-      this.getPages(to.params.razdel);
-    }
+    // $route(to, from) {
+    //   this.getPages(to.params.razdel)
+    // }
   }
-};
+}
 </script>
 
 <style scoped>

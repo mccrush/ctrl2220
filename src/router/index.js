@@ -19,16 +19,16 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import('../views/Admin.vue'),
-    children: [
-      {
-        path: '/admin/:razdel/page/:id?',
-        component: () => import('../compadmin/FormPage.vue'),
-      },
-      {
-        path: '/admin/:razdel/:id?',
-        component: () => import('../compadmin/FormRazdel.vue')
-      }
-    ],
+    // children: [
+    //   {
+    //     path: '/admin/:razdel/page/:id?',
+    //     component: () => import('../compadmin/FormPage.vue'),
+    //   },
+    //   {
+    //     path: '/admin/:razdel/:id?',
+    //     component: () => import('../compadmin/FormRazdel.vue')
+    //   }
+    // ],
     // ВКЛЮЧИТЬ на продакшине!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     meta: {
       requiresAuth: true
