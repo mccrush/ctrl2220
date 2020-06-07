@@ -18,13 +18,13 @@ import "firebase/storage"; // File
 import { apiKey } from '../apiKey'
 const firebaseConfig = {
   apiKey,
-  authDomain: "ctrl2220.firebaseapp.com",
-  databaseURL: "https://ctrl2220.firebaseio.com",
-  projectId: "ctrl2220",
-  storageBucket: "ctrl2220.appspot.com",
-  messagingSenderId: "31311777944",
-  appId: "1:31311777944:web:09ea4ea8bdb2ae3a2d80ed",
-  measurementId: "G-3566KJWVFP"
+  authDomain: "site-237c4.firebaseapp.com",
+  databaseURL: "https://site-237c4.firebaseio.com",
+  projectId: "site-237c4",
+  storageBucket: "site-237c4.appspot.com",
+  messagingSenderId: "813961811635",
+  appId: "1:813961811635:web:2703ce4e3b51bf3a3302c6",
+  measurementId: "G-PVQWWMTEZL"
 };
 
 firebase.initializeApp(firebaseConfig);
