@@ -8,16 +8,8 @@ export default {
     abouts: []
   },
   mutations: {
-    getPages(state, razdel) {
-      db.collection(razdel).get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            state[razdel].push(doc.data());
-          });
-        })
-        .catch((err) => {
-          console.log('Error getting documents page', err);
-        });
+    getPages(state, { razdel, elements }) {
+      state[razdel] = elements
     },
     createPage(state, page) {
       state[page.razdel].push(page);
@@ -33,8 +25,20 @@ export default {
     createPage({ commit }, page) {
       commit('createPage', page)
     },
-    getPages({ commit }, razdel) {
-      commit('getPages', razdel)
+    async getPages({ commit }, razdel) {
+      const elements = []
+      await db.collection(razdel).get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            elements.push(doc.data());
+          });
+        })
+        .catch((err) => {
+          console.log('Error getting documents page', err);
+        });
+
+      commit('getPages', { razdel, elements })
+
     }
   },
   getters: {
