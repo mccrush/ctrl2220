@@ -114,12 +114,8 @@ export default {
 
       if (this.id) {
         // Update
-        console.log('In Else Update')
       } else {
-        // Create
-        console.log('In Else Create')
         try {
-          console.log('In try')
           this.$store.dispatch('createPage', element)
           this.showSuccess()
           this.title = ''
@@ -127,7 +123,7 @@ export default {
           this.description = ''
         } catch (err) {
           this.showError()
-          console.log('Щшибка при создании элемента:', err)
+          console.log('Ошибка при создании элемента:', err)
         }
       }
     },
