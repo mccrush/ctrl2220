@@ -73,9 +73,7 @@
 <script>
 export default {
   props: {
-    element: {
-      type: Object
-    }
+    element: Object
   },
   data() {
     return {
@@ -88,13 +86,16 @@ export default {
     }
   },
   mounted() {
-    console.log('From Mount this.element=', this.element)
-
     if (this.element) {
       this.title = this.element.title
       this.alias = this.element.alias
       this.description = this.element.description
       this.active = this.element.active
+    } else {
+      this.title = ''
+      this.alias = ''
+      this.description = ''
+      this.active = true
     }
   },
   methods: {
@@ -102,8 +103,6 @@ export default {
   },
   watch: {
     element() {
-      console.log('Elem from watch')
-
       if (this.element) {
         this.title = this.element.title
         this.alias = this.element.alias
