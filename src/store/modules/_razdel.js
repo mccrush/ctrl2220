@@ -35,7 +35,7 @@ export default {
     }
   },
   getters: {
-    razdels: state => state.razdels,
+    //razdels: state => state.razdels,
     razdelById: state => id => state.razdels.find(razdel => razdel.id === id)
   }
 }

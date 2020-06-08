@@ -5,7 +5,8 @@ export default {
     napravs: [],
     reshens: [],
     vid_napravs: [],
-    abouts: []
+    abouts: [],
+    razdels: []
   },
   mutations: {
     getPages(state, { razdel, elements }) {
@@ -47,5 +48,6 @@ export default {
     reshens: state => state.reshens,
     vid_napravs: state => state.vid_napravs,
     abouts: state => state.abouts,
+    razdels: state => state.razdels,
   }
 }

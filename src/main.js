@@ -32,11 +32,11 @@ export const db = firebase.firestore();
 export const auth = firebase.auth();
 export const storage = firebase.storage();
 
-store.dispatch("getRazdels");
+store.dispatch("getPages", 'razdels');
 store.dispatch("getPages", 'napravs');
-// store.dispatch("getPages", 'reshen');
-// store.dispatch("getPages", 'vid_naprav');
-// store.dispatch("getPages", 'about');
+// store.dispatch("getPages", 'reshens');
+// store.dispatch("getPages", 'vid_napravs');
+// store.dispatch("getPages", 'abouts');
 
 let app = "";
 firebase.auth().onAuthStateChanged((user) => {
