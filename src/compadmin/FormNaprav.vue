@@ -59,12 +59,12 @@
 
     <transition name="fade" mode="out-in">
       <h5 id="success" v-if="success">
-        <span class="badge badge-success p-2 pl-3 pr-3">Успешно!</span>
+        <span class="badge badge-success p-2 pl-3 pr-3">{{success}}</span>
       </h5>
     </transition>
     <transition name="fade" mode="out-in">
       <h5 id="error" v-if="error">
-        <span class="badge badge-danger p-2 pl-3 pr-3">Ошибка</span>
+        <span class="badge badge-danger p-2 pl-3 pr-3">{{error}}</span>
       </h5>
     </transition>
   </form>
@@ -82,8 +82,8 @@ export default {
       description: '',
       active: true,
       id: '',
-      success: false,
-      error: false
+      success: '',
+      error: ''
     }
   },
   mounted() {
@@ -113,31 +113,37 @@ export default {
       }
 
       if (this.id) {
-        // Update
+        try {
+          //this.$store.dispatch('updateElement', element)
+          this.showSuccess('Обновлено')
+        } catch (error) {
+          this.showError('Ошибка при обновлении')
+          console.log('Ошибка при Обновлении элемента:', err)
+        }
       } else {
         try {
           this.$store.dispatch('createPage', element)
-          this.showSuccess()
+          this.showSuccess('Сохранено')
           this.title = ''
           this.alias = ''
           this.description = ''
         } catch (err) {
-          this.showError()
+          this.showError('Ошибка при сохранении')
           console.log('Ошибка при создании элемента:', err)
         }
       }
     },
-    showSuccess() {
-      this.success = true
+    showSuccess(mes) {
+      this.success = mes
       setTimeout(() => {
-        this.success = false
-      }, 4500)
+        this.success = ''
+      }, 4000)
     },
-    showError() {
-      this.error = true
+    showError(mes) {
+      this.error = mes
       setTimeout(() => {
-        this.error = false
-      }, 4500)
+        this.error = ''
+      }, 4000)
     }
   },
   watch: {
