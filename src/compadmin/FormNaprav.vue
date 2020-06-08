@@ -97,7 +97,8 @@ export default {
       this.title = ''
       this.alias = ''
       this.description = ''
-      ;(this.active = true), (this.id = '')
+      this.active = true
+      this.id = ''
     }
   },
   methods: {
@@ -121,6 +122,9 @@ export default {
           console.log('In try')
           this.$store.dispatch('createPage', element)
           this.showSuccess()
+          this.title = ''
+          this.alias = ''
+          this.description = ''
         } catch (err) {
           this.showError()
           console.log('Щшибка при создании элемента:', err)
