@@ -114,7 +114,7 @@ export default {
 
       if (this.id) {
         try {
-          //this.$store.dispatch('updateElement', element)
+          this.$store.dispatch('updateElement', element)
           this.showSuccess('Обновлено')
         } catch (error) {
           this.showError('Ошибка при обновлении')
@@ -153,11 +153,13 @@ export default {
         this.alias = this.element.alias
         this.description = this.element.description
         this.active = this.element.active
+        this.id = this.element.id
       } else {
         this.title = ''
         this.alias = ''
         this.description = ''
         this.active = true
+        this.id = ''
       }
     }
   }

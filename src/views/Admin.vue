@@ -64,22 +64,20 @@ export default {
       selectRazdelId: '',
       selectRazdelAlias: '',
       selectElementId: '',
-      elements: [],
       element: null,
       mode: 'create'
     }
   },
   mounted() {},
-  computed: mapGetters([
-    'razdels',
-    'napravs',
-    'reshens',
-    'vid_napravs',
-    'abouts'
-  ]),
+  computed: {
+    ...mapGetters(['razdels', 'napravs', 'reshens', 'vid_napravs', 'abouts']),
+    elements() {
+      return this[this.selectRazdelAlias] || []
+    }
+  },
   methods: {
     selectRazdel({ id, alias }) {
-      this.elements = this[alias]
+      //this.elements = this[alias]
       this.selectRazdelId = id
       this.selectRazdelAlias = alias
       this.selectElementId = ''
@@ -104,6 +102,9 @@ export default {
         this.element = null
       }
     }
+    // napravs() {
+    //   this.elements = this.napravs
+    // }
   }
 }
 </script>

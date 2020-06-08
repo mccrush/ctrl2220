@@ -9,6 +9,12 @@ export default {
     razdels: []
   },
   mutations: {
+    updateElement(state, element) {
+      const elements = state[element.razdel].concat()
+      const index = state[element.razdel].findIndex(elem => elem.id === element.id)
+      elements[index] = element
+      state[element.razdel] = elements
+    },
     getPages(state, { razdel, elements }) {
       state[razdel] = elements
     },
@@ -17,6 +23,18 @@ export default {
     }
   },
   actions: {
+    updateElement({ commit, dispatch }, element) {
+      db.collection(element.razdel).doc(element.id).update(element)
+        .then(function () {
+          console.log("Document successfully updated! From Element");
+        })
+        .catch(function (error) {
+          console.error("Error updating document From Element: ", error);
+        });
+
+      commit('updateElement', element)
+      //dispatch('getPages', element.razdel)
+    },
     createPage({ commit }, page) {
       db.collection(page.razdel)
         .doc(page.id)
@@ -26,9 +44,9 @@ export default {
 
       commit('createPage', page)
     },
-    async getPages({ commit }, razdel) {
+    getPages({ commit }, razdel) {
       const elements = []
-      await db.collection(razdel).get()
+      db.collection(razdel).get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
             elements.push(doc.data());
@@ -39,7 +57,6 @@ export default {
         });
 
       commit('getPages', { razdel, elements })
-
     }
   },
   getters: {
