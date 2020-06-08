@@ -51,6 +51,32 @@
       >{{active ? 'Активна (будет отображаться)' : 'Не активна (не будет отображаться)'}}</label>
     </div>
 
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="fileimage">Допустимые форматы: jpeg, png</label>
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            class="form-control-file"
+            id="fileimage"
+            ref="imgform"
+            @change="uploadImage()"
+          />
+        </div>
+      </div>
+      <div class="col-12">
+        <div v-for="(ims, index) in imagesSrc" :key="index+'imgs'" class="float-left imgsize">
+          <img :src="ims" class="img-thumbnail imgsize" />
+          <button
+            type="button"
+            class="btn btn-sm btn-light btn-block"
+            @click="removeImage(index)"
+          >Удалить</button>
+        </div>
+      </div>
+    </div>
+
     <button
       type="submit"
       class="btn btn-primary btn-sm float-right shadow-sm"
@@ -71,6 +97,8 @@
 </template>
 
 <script>
+import { storage } from '@/main.js'
+
 export default {
   props: {
     element: Object
@@ -82,8 +110,11 @@ export default {
       description: '',
       active: true,
       id: '',
+      imgurl: [],
       success: '',
-      error: ''
+      error: '',
+      imagesSrc: [],
+      imagesFiles: []
     }
   },
   mounted() {
@@ -93,15 +124,46 @@ export default {
       this.description = this.element.description
       this.active = this.element.active
       this.id = this.element.id
+      this.imgurl = this.element.imgurl
     } else {
       this.title = ''
       this.alias = ''
       this.description = ''
       this.active = true
       this.id = ''
+      this.imgurl = []
     }
   },
   methods: {
+    removeImage(index) {
+      this.imagesFiles.splice(index, 1)
+      this.imagesSrc.splice(index, 1)
+    },
+    uploadImage() {
+      let file = this.$refs.imgform.files[0]
+      //console.log(file)
+
+      if (file.type === 'image/jpeg' || 'image/png') {
+        let imgLink = new FileReader()
+        imgLink.onload = e => {
+          this.imagesSrc.push(e.target.result)
+        }
+        imgLink.readAsDataURL(file)
+
+        this.imagesFiles.push(file)
+
+        // Загрузка на сервер
+        // let ref = storage.ref().child('img/vid_napravs/' + file.name)
+        // let uploadTask = ref.put(file).then(function(snapshot) {
+        //   console.log('Uploaded a blob or file!')
+        //   snapshot.ref.getDownloadURL().then(function(downloadURL) {
+        //     console.log('File available at', downloadURL)
+        //   })
+        // })
+      } else {
+        this.showError('Неверный тип файла')
+      }
+    },
     submit() {
       const element = {
         title: this.title.trim(),
@@ -109,7 +171,8 @@ export default {
         description: this.description,
         active: this.active,
         razdel: 'vid_napravs',
-        id: this.id || Date.now().toString()
+        id: this.id || Date.now().toString(),
+        imgurl: this.imgurl
       }
 
       if (this.id) {
@@ -127,6 +190,7 @@ export default {
           this.title = ''
           this.alias = ''
           this.description = ''
+          this.imgurl = []
         } catch (err) {
           this.showError('Ошибка при сохранении')
           console.log('Ошибка при создании элемента:', err)
@@ -154,13 +218,21 @@ export default {
         this.description = this.element.description
         this.active = this.element.active
         this.id = this.element.id
+        this.imgurl = this.element.imgurl
       } else {
         this.title = ''
         this.alias = ''
         this.description = ''
         this.active = true
         this.id = ''
+        this.imgurl = []
       }
+    },
+    imagesFiles() {
+      console.log('imagesFiles: ', this.imagesFiles)
+    },
+    imagesSrc() {
+      console.log('imagesSrc: ', this.imagesSrc)
     }
   }
 }
@@ -180,5 +252,11 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0;
+}
+
+.imgsize {
+  height: 100px;
+  max-width: 150px;
+  max-height: 100px;
 }
 </style>
