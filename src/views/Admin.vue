@@ -9,7 +9,14 @@
         <div class="col-2 border-right">
           <h6 class="text-center mt-2">Элемент</h6>
         </div>
-        <div class="col-8">
+        <div class="col-2 p-0">
+          <button
+            class="btn btn-success btn-sm btn-block rounded-0 h-100"
+            @click="createElement"
+            :disabled="!selectRazdelAlias"
+          >Создать</button>
+        </div>
+        <div class="col-6">
           <h6
             class="text-center mt-2"
           >{{mode === 'create' ? 'Режим создания' : 'Режим редактирования'}}</h6>
@@ -18,12 +25,10 @@
     </div>
 
     <div class="col-2 border-right p-0">
-      <button class="btn btn-success btn-sm btn-block rounded-0" @click="createRazdel">Создать</button>
       <ListRazdel @select-razdel="selectRazdel" :currentId="selectRazdelId" :razdels="razdels" />
     </div>
     <div class="col-2 border-right p-0">
       <div v-if="elements.length">
-        <button class="btn btn-success btn-sm btn-block rounded-0" @click="createElement">Создать</button>
         <ListElement
           @select-element="selectElement"
           :currentId="selectElementId"
@@ -60,6 +65,7 @@ export default {
       selectRazdelAlias: '',
       selectElementId: '',
       elements: [],
+      element: null,
       mode: 'create'
     }
   },
@@ -82,12 +88,6 @@ export default {
     selectElement({ id, alias }) {
       this.selectElementId = id
       this.mode = 'edit'
-    },
-    createRazdel() {
-      this.elements = []
-      this.selectRazdelId = ''
-      this.selectRazdelAlias = ''
-      this.mode = 'create'
     },
     createElement() {
       this.selectElementId = ''

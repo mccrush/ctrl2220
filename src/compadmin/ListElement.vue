@@ -1,5 +1,5 @@
 <template>
-  <div class="list-group list-group-flush mt-1">
+  <div class="list-group list-group-flush">
     <button
       type="button"
       v-for="(element, index) in elements"

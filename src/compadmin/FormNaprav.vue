@@ -81,6 +81,7 @@ export default {
       alias: '',
       description: '',
       active: true,
+      id: '',
       success: false,
       error: false
     }
@@ -91,15 +92,53 @@ export default {
       this.alias = this.element.alias
       this.description = this.element.description
       this.active = this.element.active
+      this.id = this.element.id
     } else {
       this.title = ''
       this.alias = ''
       this.description = ''
-      this.active = true
+      ;(this.active = true), (this.id = '')
     }
   },
   methods: {
-    submit() {}
+    submit() {
+      const element = {
+        title: this.title.trim(),
+        alias: this.alias.trim(),
+        description: this.description,
+        active: this.active,
+        razdel: 'napravs',
+        id: this.id || Date.now().toString()
+      }
+
+      if (this.id) {
+        // Update
+        console.log('In Else Update')
+      } else {
+        // Create
+        console.log('In Else Create')
+        try {
+          console.log('In try')
+          this.$store.dispatch('createPage', element)
+          this.showSuccess()
+        } catch (err) {
+          this.showError()
+          console.log('Щшибка при создании элемента:', err)
+        }
+      }
+    },
+    showSuccess() {
+      this.success = true
+      setTimeout(() => {
+        this.success = false
+      }, 3000)
+    },
+    showError() {
+      this.error = true
+      setTimeout(() => {
+        this.error = false
+      }, 3000)
+    }
   },
   watch: {
     element() {
@@ -118,3 +157,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#success,
+#error {
+  position: fixed;
+  top: 10px;
+  right: 15px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
+</style>

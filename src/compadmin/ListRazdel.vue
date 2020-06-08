@@ -1,5 +1,5 @@
 <template>
-  <div class="list-group list-group-flush mt-1">
+  <div class="list-group list-group-flush">
     <LoadIcon v-if="!razdels.length" class="m-auto" />
     <button
       type="button"

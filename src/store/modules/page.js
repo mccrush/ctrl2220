@@ -13,16 +13,16 @@ export default {
     },
     createPage(state, page) {
       state[page.razdel].push(page);
-
+    }
+  },
+  actions: {
+    createPage({ commit }, page) {
       db.collection(page.razdel)
         .doc(page.id)
         .set(page)
         .then(() => { console.log("Document successfully written! page"); })
         .catch(err => { console.error("Error writing document page: ", err) });
-    }
-  },
-  actions: {
-    createPage({ commit }, page) {
+
       commit('createPage', page)
     },
     async getPages({ commit }, razdel) {
