@@ -59,12 +59,12 @@
 
     <transition name="fade" mode="out-in">
       <h5 id="success" v-if="success">
-        <span class="badge badge-success">Success</span>
+        <span class="badge badge-success p-2 pl-3 pr-3">Успешно!</span>
       </h5>
     </transition>
     <transition name="fade" mode="out-in">
       <h5 id="error" v-if="error">
-        <span class="badge badge-danger">Error</span>
+        <span class="badge badge-danger p-2 pl-3 pr-3">Ошибка</span>
       </h5>
     </transition>
   </form>
@@ -135,13 +135,13 @@ export default {
       this.success = true
       setTimeout(() => {
         this.success = false
-      }, 3000)
+      }, 4500)
     },
     showError() {
       this.error = true
       setTimeout(() => {
         this.error = false
-      }, 3000)
+      }, 4500)
     }
   },
   watch: {
