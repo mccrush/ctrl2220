@@ -16,7 +16,14 @@
             :disabled="!selectRazdelAlias"
           >Создать</button>
         </div>
-        <div class="col-6">
+        <div class="col-2 p-0">
+          <button
+            class="btn btn-danger btn-sm btn-block rounded-0 h-100"
+            @click="removeElement"
+            :disabled="!selectRazdelAlias || !selectElementId"
+          >Удалить</button>
+        </div>
+        <div class="col-4">
           <h6
             class="text-center mt-2"
           >{{mode === 'create' ? 'Режим создания' : 'Режим редактирования'}}</h6>
@@ -76,8 +83,14 @@ export default {
     }
   },
   methods: {
+    removeElement() {
+      this.$store.dispatch('removeElement', {
+        razdel: this.selectRazdelAlias,
+        id: this.selectElementId
+      })
+      this.selectElementId = ''
+    },
     selectRazdel({ id, alias }) {
-      //this.elements = this[alias]
       this.selectRazdelId = id
       this.selectRazdelAlias = alias
       this.selectElementId = ''

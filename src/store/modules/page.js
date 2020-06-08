@@ -9,6 +9,11 @@ export default {
     razdels: []
   },
   mutations: {
+    removeElement(state, { razdel, id }) {
+      let elements = state[razdel].concat()
+      elements = elements.filter(elem => elem.id !== id)
+      state[razdel] = elements
+    },
     updateElement(state, element) {
       const elements = state[element.razdel].concat()
       const index = state[element.razdel].findIndex(elem => elem.id === element.id)
@@ -23,17 +28,25 @@ export default {
     }
   },
   actions: {
-    updateElement({ commit, dispatch }, element) {
+    removeElement({ commit }, { razdel, id }) {
+      db.collection(razdel).doc(id).delete().then(function () {
+        console.log("Document successfully deleted! From remove");
+      }).catch(function (error) {
+        console.error("Error removing document From remove: ", error);
+      });
+
+      commit('removeElement', { razdel, id })
+    },
+    updateElement({ commit }, element) {
       db.collection(element.razdel).doc(element.id).update(element)
         .then(function () {
-          console.log("Document successfully updated! From Element");
+          console.log("Document successfully updated! From update");
         })
         .catch(function (error) {
-          console.error("Error updating document From Element: ", error);
+          console.error("Error updating document From update: ", error);
         });
 
       commit('updateElement', element)
-      //dispatch('getPages', element.razdel)
     },
     createPage({ commit }, page) {
       db.collection(page.razdel)
