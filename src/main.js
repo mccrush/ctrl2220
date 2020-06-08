@@ -35,7 +35,7 @@ export const storage = firebase.storage();
 store.dispatch("getPages", 'razdels');
 store.dispatch("getPages", 'napravs');
 // store.dispatch("getPages", 'reshens');
-// store.dispatch("getPages", 'vid_napravs');
+store.dispatch("getPages", 'vid_napravs');
 // store.dispatch("getPages", 'abouts');
 
 let app = "";

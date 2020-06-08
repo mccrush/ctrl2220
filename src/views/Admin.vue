@@ -48,6 +48,10 @@
         v-if="selectRazdelAlias === 'napravs' && (mode === 'create' || selectElementId)"
         :element="element"
       />
+      <FormVidNaprav
+        v-if="selectRazdelAlias === 'vid_napravs' && (mode === 'create' || selectElementId)"
+        :element="element"
+      />
     </div>
   </div>
 </template>
@@ -58,13 +62,15 @@ import vueHeadful from 'vue-headful'
 import ListRazdel from '@/compadmin/ListRazdel'
 import ListElement from '@/compadmin/ListElement'
 import FormNaprav from '@/compadmin/FormNaprav'
+import FormVidNaprav from '@/compadmin/FormVidNaprav'
 
 export default {
   components: {
     vueHeadful,
     ListRazdel,
     ListElement,
-    FormNaprav
+    FormNaprav,
+    FormVidNaprav
   },
   data() {
     return {
@@ -115,9 +121,6 @@ export default {
         this.element = null
       }
     }
-    // napravs() {
-    //   this.elements = this.napravs
-    // }
   }
 }
 </script>
