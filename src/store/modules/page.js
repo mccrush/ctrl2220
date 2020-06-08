@@ -46,6 +46,6 @@ export default {
     napravs: state => state.napravs,
     reshens: state => state.reshens,
     vid_napravs: state => state.vid_napravs,
-    abouts: state => state.abouts
+    abouts: state => state.abouts,
   }
 }

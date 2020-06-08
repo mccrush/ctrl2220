@@ -5,9 +5,11 @@
       v-for="(element, index) in elements"
       :key="'pag'+index"
       :class="{selected: element.id === currentId}"
-      class="list-group-item list-group-item-action p-1 border-0"
+      class="list-group-item list-group-item-action p-1 pl-2 border-0"
       @click="$emit('select-element', {id: element.id, alias: element.alias})"
-    >{{element.title}}</button>
+    >
+      <small>{{element.title}}</small>
+    </button>
   </div>
 </template>
 
