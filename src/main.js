@@ -6,10 +6,10 @@ import store from './store'
 import { auth } from './firebase'
 
 
-store.dispatch("getPages", 'razdels');
-store.dispatch("getPages", 'napravs');
+//store.dispatch("getPages", 'razdels');
+//store.dispatch("getPages", 'napravs');
 // store.dispatch("getPages", 'reshens');
-store.dispatch("getPages", 'vid_napravs');
+//store.dispatch("getPages", 'vid_napravs');
 // store.dispatch("getPages", 'abouts');
 
 let app

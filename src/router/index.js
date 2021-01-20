@@ -12,7 +12,7 @@ const router = createRouter({
     {
       path: '/404', // Первая, для перекрытия остальных
       name: '404',
-      component: () => import('../views/HotFound.vue')
+      component: () => import('../views/NotFound.vue')
     },
     {
       path: '/admin',
