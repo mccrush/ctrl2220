@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 
