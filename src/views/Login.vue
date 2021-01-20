@@ -7,7 +7,12 @@
       <input type="text" class="form-control" id="email" v-model="email" />
       <br />
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" v-model="password" />
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        v-model="password"
+      />
       <br />
       <button class="btn btn-success btn-block" @click="login">Войти</button>
     </div>
@@ -15,33 +20,33 @@
 </template>
 
 <script>
-import vueHeadful from "vue-headful";
-import { auth } from "@/main.js";
+import vueHeadful from 'vue-headful'
+import { auth } from '@/firebase.js'
 
 export default {
   components: {
-    vueHeadful
+    vueHeadful,
   },
   data() {
     return {
-      email: "",
-      password: ""
-    };
+      email: '',
+      password: '',
+    }
   },
   methods: {
     login() {
       auth
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(user => {
-          this.$store.dispatch("logIn");
-          this.$router.push("/admin");
+        .then((user) => {
+          this.$store.dispatch('logIn')
+          this.$router.push('/admin')
         })
-        .catch(function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          alert("Login: errors:", errorCode, "& ", errorMessage);
-        });
-    }
-  }
-};
+        .catch(function (error) {
+          var errorCode = error.code
+          var errorMessage = error.message
+          alert('Login: errors:', errorCode, '& ', errorMessage)
+        })
+    },
+  },
+}
 </script>

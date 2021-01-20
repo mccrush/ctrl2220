@@ -5,9 +5,11 @@
     </transition>
 
     <div class="container pt-4">
-      <transition name="fade" mode="out-in">
-        <router-view />
-      </transition>
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
 
       <transition name="fade" mode="out-in">
         <Footer />
@@ -18,13 +20,13 @@
 
 <script>
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Navbar from "@/components/Navbar.vue";
-import Footer from "@/components/Footer.vue";
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
   },
   mounted() {
     // this.$store.dispatch("getRazdels");
@@ -32,15 +34,18 @@ export default {
     // this.$store.dispatch("getPages", "reshen");
     // this.$store.dispatch("getPages", "vid_naprav");
     // this.$store.dispatch("getPages", "about");
-  }
-};
+  },
+}
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
+
 #app {
-  font-family: "Exo 2", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Exo 2', sans-serif;
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+  font-weight: 400;
   color: #2c3e50;
   background: #f2f2f2;
 }
