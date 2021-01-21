@@ -14,25 +14,33 @@
             class="btn btn-success btn-sm btn-block rounded-0 h-100"
             @click="createElement"
             :disabled="!selectRazdelAlias"
-          >Создать</button>
+          >
+            Создать
+          </button>
         </div>
         <div class="col-2 p-0">
           <button
             class="btn btn-danger btn-sm btn-block rounded-0 h-100"
-            @click="removeElement"
+            @click="deleteElement"
             :disabled="!selectRazdelAlias || !selectElementId"
-          >Удалить</button>
+          >
+            Удалить
+          </button>
         </div>
         <div class="col-4">
-          <h6
-            class="text-center mt-2"
-          >{{mode === 'create' ? 'Режим создания' : 'Режим редактирования'}}</h6>
+          <h6 class="text-center mt-2">
+            {{ mode === 'create' ? 'Режим создания' : 'Режим редактирования' }}
+          </h6>
         </div>
       </div>
     </div>
 
     <div class="col-2 border-right p-0">
-      <ListRazdel @select-razdel="selectRazdel" :currentId="selectRazdelId" :razdels="razdels" />
+      <ListRazdel
+        @select-razdel="selectRazdel"
+        :currentId="selectRazdelId"
+        :razdels="razdels"
+      />
     </div>
     <div class="col-2 border-right p-0">
       <div v-if="elements.length">
@@ -45,11 +53,17 @@
     </div>
     <div class="col-8 pt-3 pb-3">
       <FormNaprav
-        v-if="selectRazdelAlias === 'napravs' && (mode === 'create' || selectElementId)"
+        v-if="
+          selectRazdelAlias === 'napravs' &&
+          (mode === 'create' || selectElementId)
+        "
         :element="element"
       />
       <FormVidNaprav
-        v-if="selectRazdelAlias === 'vid_napravs' && (mode === 'create' || selectElementId)"
+        v-if="
+          selectRazdelAlias === 'vid_napravs' &&
+          (mode === 'create' || selectElementId)
+        "
         :element="element"
       />
     </div>
@@ -70,7 +84,7 @@ export default {
     ListRazdel,
     ListElement,
     FormNaprav,
-    FormVidNaprav
+    FormVidNaprav,
   },
   data() {
     return {
@@ -78,7 +92,7 @@ export default {
       selectRazdelAlias: '',
       selectElementId: '',
       element: null,
-      mode: 'create'
+      mode: 'create',
     }
   },
   mounted() {},
@@ -86,13 +100,13 @@ export default {
     ...mapGetters(['razdels', 'napravs', 'reshens', 'vid_napravs', 'abouts']),
     elements() {
       return this[this.selectRazdelAlias] || []
-    }
+    },
   },
   methods: {
-    removeElement() {
-      this.$store.dispatch('removeElement', {
+    deleteElement() {
+      this.$store.dispatch('deleteElement', {
         razdel: this.selectRazdelAlias,
-        id: this.selectElementId
+        id: this.selectElementId,
       })
       this.selectElementId = ''
     },
@@ -109,19 +123,19 @@ export default {
     createElement() {
       this.selectElementId = ''
       this.mode = 'create'
-    }
+    },
   },
   watch: {
     selectElementId() {
       if (this.selectElementId) {
         this.element = this[this.selectRazdelAlias].find(
-          elem => elem.id === this.selectElementId
+          (elem) => elem.id === this.selectElementId
         )
       } else {
         this.element = null
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
