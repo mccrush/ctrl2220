@@ -10,7 +10,7 @@ import { auth } from './firebase'
 //store.dispatch("getPages", 'napravs');
 // store.dispatch("getPages", 'reshens');
 //store.dispatch("getPages", 'vid_napravs');
-// store.dispatch("getPages", 'abouts');
+//store.dispatch("getPages", 'abouts');
 
 let app
 

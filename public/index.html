@@ -10,6 +10,11 @@
   <meta name="keywords"
     content="Славгород видеонаблюдение, славгород сигнализация, славгород контроль доступа, славгород охрана периметра">
   <title>Полный контроль</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -17,7 +22,7 @@
     <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
         Please enable it to continue.</strong>
   </noscript>
-  <div id="app"></div>
+  <div id="app" v-cloak></div>
   <!-- built files will be auto injected -->
   <!-- Yandex.Metrika counter -->
 </body>

@@ -31,9 +31,9 @@ export default {
   mounted() {
     // this.$store.dispatch("getRazdels");
     this.$store.dispatch('getPages', 'razdels')
-    this.$store.dispatch('getPages', 'napravs')
+    // this.$store.dispatch('getPages', 'napravs')
     // this.$store.dispatch("getPages", "reshen");
-    this.$store.dispatch('getPages', 'vid_napravs')
+    // this.$store.dispatch('getPages', 'vid_napravs')
     // this.$store.dispatch("getPages", "about");
   },
 }
@@ -44,8 +44,6 @@ export default {
 
 #app {
   font-family: 'Exo 2', sans-serif;
-  /* -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
   font-weight: 400;
   color: #2c3e50;
   background: #f2f2f2;
@@ -73,7 +71,8 @@ a {
 .fade-leave-active {
   transition: opacity 0.3s ease;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
