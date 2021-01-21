@@ -30,7 +30,7 @@ export default {
   },
   mounted() {
     // this.$store.dispatch("getRazdels");
-    // this.$store.dispatch("getPages", "naprav");
+    this.$store.dispatch('getPages', 'napravs')
     // this.$store.dispatch("getPages", "reshen");
     // this.$store.dispatch("getPages", "vid_naprav");
     // this.$store.dispatch("getPages", "about");

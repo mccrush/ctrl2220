@@ -18,7 +18,7 @@ export default {
   },
   mounted() {
     /* Реализовать проверку существования Раздела по алиасу. Иначе редирект на 404 */
-    console.log(auth.currentUser)
+    //console.log(auth.currentUser)
   },
 }
 </script>
