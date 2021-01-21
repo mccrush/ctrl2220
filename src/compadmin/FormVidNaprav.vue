@@ -24,10 +24,10 @@
             placeholder="alias"
             v-model="alias"
           />
-          <small
-            id="aliasHelp"
-            class="form-text text-muted"
-          >Латинскими символами, с маленькой буквы, без пробелов и дефисов</small>
+          <small id="aliasHelp" class="form-text text-muted"
+            >Латинскими символами, с маленькой буквы, без пробелов и
+            дефисов</small
+          >
         </div>
       </div>
     </div>
@@ -44,11 +44,17 @@
     </div>
 
     <div class="form-group form-check mt-4">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="active" />
-      <label
-        class="form-check-label"
-        for="exampleCheck1"
-      >{{active ? 'Активна (будет отображаться)' : 'Не активна (не будет отображаться)'}}</label>
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="exampleCheck1"
+        v-model="active"
+      />
+      <label class="form-check-label" for="exampleCheck1">{{
+        active
+          ? 'Активна (будет отображаться)'
+          : 'Не активна (не будет отображаться)'
+      }}</label>
     </div>
 
     <div class="row mb-3">
@@ -66,13 +72,19 @@
         </div>
       </div>
       <div class="col-12">
-        <div v-for="(ims, index) in imagesSrc" :key="index+'imgs'" class="float-left imgsize">
+        <div
+          v-for="(ims, index) in imagesSrc"
+          :key="index + 'imgs'"
+          class="float-left imgsize"
+        >
           <img :src="ims" class="img-thumbnail imgsize" />
           <button
             type="button"
             class="btn btn-sm btn-light btn-block"
             @click="removeImage(index)"
-          >Удалить</button>
+          >
+            Удалить
+          </button>
         </div>
       </div>
     </div>
@@ -81,27 +93,27 @@
       type="submit"
       class="btn btn-primary btn-sm float-right shadow-sm"
       :disabled="!title.length || !alias.length"
-    >Сохранить</button>
+    >
+      Сохранить
+    </button>
 
     <transition name="fade" mode="out-in">
       <h5 id="success" v-if="success">
-        <span class="badge badge-success p-2 pl-3 pr-3">{{success}}</span>
+        <span class="badge badge-success p-2 pl-3 pr-3">{{ success }}</span>
       </h5>
     </transition>
     <transition name="fade" mode="out-in">
       <h5 id="error" v-if="error">
-        <span class="badge badge-danger p-2 pl-3 pr-3">{{error}}</span>
+        <span class="badge badge-danger p-2 pl-3 pr-3">{{ error }}</span>
       </h5>
     </transition>
   </form>
 </template>
 
 <script>
-import { storage } from '@/main.js'
-
 export default {
   props: {
-    element: Object
+    element: Object,
   },
   data() {
     return {
@@ -114,7 +126,7 @@ export default {
       success: '',
       error: '',
       imagesSrc: [],
-      imagesFiles: []
+      imagesFiles: [],
     }
   },
   mounted() {
@@ -145,7 +157,7 @@ export default {
 
       if (file.type === 'image/jpeg' || 'image/png') {
         let imgLink = new FileReader()
-        imgLink.onload = e => {
+        imgLink.onload = (e) => {
           this.imagesSrc.push(e.target.result)
         }
         imgLink.readAsDataURL(file)
@@ -172,7 +184,7 @@ export default {
         active: this.active,
         razdel: 'vid_napravs',
         id: this.id || Date.now().toString(),
-        imgurl: this.imgurl
+        imgurl: this.imgurl,
       }
 
       if (this.id) {
@@ -208,7 +220,7 @@ export default {
       setTimeout(() => {
         this.error = ''
       }, 4000)
-    }
+    },
   },
   watch: {
     element() {
@@ -233,8 +245,8 @@ export default {
     },
     imagesSrc() {
       console.log('imagesSrc: ', this.imagesSrc)
-    }
-  }
+    },
+  },
 }
 </script>
 
