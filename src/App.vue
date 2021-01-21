@@ -32,9 +32,9 @@ export default {
     // this.$store.dispatch("getRazdels");
     this.$store.dispatch('getPages', 'razdels')
     this.$store.dispatch('getPages', 'napravs')
-    // this.$store.dispatch("getPages", "reshen");
-    // this.$store.dispatch('getPages', 'vid_napravs')
-    // this.$store.dispatch("getPages", "about");
+    //this.$store.dispatch('getPages', 'reshens')
+    this.$store.dispatch('getPages', 'vid_napravs')
+    //this.$store.dispatch('getPages', 'abouts')
   },
 }
 </script>

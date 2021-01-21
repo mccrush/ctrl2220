@@ -1,4 +1,4 @@
-import { db } from "@/firebase.js";
+import { db } from '@/firebase.js'
 
 export default {
   state: {
@@ -27,7 +27,7 @@ export default {
         const snapshot = await pagesRef.get()
 
         if (snapshot.empty) {
-          console.log('Запрос вернул пустую коллекцию из БД')
+          console.log('Запрос вернул пустую коллекцию ', razdel, ' из БД, actions:getPages()')
           return
         }
 
