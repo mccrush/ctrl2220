@@ -17,6 +17,13 @@ export default {
       const index = state[element.razdel].findIndex(elem => elem.id === element.id)
       elements[index] = element
       state[element.razdel] = elements
+    },
+    addElement(state, element) {
+      state[element.razdel].push(element)
+    },
+    deleteElement(state, { razdel, id }) {
+      const elements = state[razdel].concat()
+      state[razdel] = elements.filter(element => element.id !== id)
     }
   },
   actions: {
@@ -47,6 +54,22 @@ export default {
         commit('updateElement', element)
       } catch (error) {
         console.log('Ошибка при обновлении элемента, actions:updateElement()', error)
+      }
+    },
+    async addElement({ commit }, element) {
+      try {
+        await db.collection(element.razdel).doc(element.id).set(element)
+        commit('addElement', element)
+      } catch (error) {
+        console.log('Ошибка при добавлении элемента, actions:addElement()', error)
+      }
+    },
+    async deleteElement({ commit }, { razdel, id }) {
+      try {
+        const res = await db.collection(razdel).doc(id).delete()
+        commit('deleteElement', { razdel, id })
+      } catch (error) {
+        console.log('Ошибка при удалении элемента, actions:deleteElement()', error)
       }
     }
   },
