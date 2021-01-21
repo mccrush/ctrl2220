@@ -15,12 +15,10 @@
 </template>
 
 <script>
-import LoadIcon from '@/components/LoadIcon'
 import Progress from '@/components/Progress'
 export default {
   name: 'index',
   components: {
-    LoadIcon,
     Progress,
   },
   computed: {

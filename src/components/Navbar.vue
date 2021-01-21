@@ -25,7 +25,9 @@
           <li class="nav-item"></li>
 
           <li class="nav-item dropdown">
+            <Progress v-if="!napravs.length" class="mt-2" />
             <router-link
+              v-else
               to="/naprav"
               class="nav-link dropdown-toggle"
               id="navbarDropdown"
@@ -33,18 +35,19 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-              >Naprav</router-link
+              >Направления</router-link
             >
+
             <div
               class="dropdown-menu shadow-sm"
               aria-labelledby="navbarDropdown"
             >
-              <router-link to="/naprav/internet" class="dropdown-item"
-                >Internet</router-link
-              >
-              <div class="dropdown-divider"></div>
-              <router-link to="/naprav/video" class="dropdown-item"
-                >Video</router-link
+              <router-link
+                v-for="naprav in napravs"
+                :key="naprav.id"
+                :to="'/naprav/' + naprav.alias"
+                class="dropdown-item"
+                >{{ naprav.title }}</router-link
               >
             </div>
           </li>
@@ -80,12 +83,19 @@
 </template>
 
 <script>
+import Progress from '@/components/Progress'
 import { auth } from '@/firebase.js'
 
 export default {
+  components: {
+    Progress,
+  },
   computed: {
     user() {
       return this.$store.getters.user
+    },
+    napravs() {
+      return this.$store.getters.napravs
     },
   },
   methods: {
