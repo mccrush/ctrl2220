@@ -10,13 +10,13 @@ export default {
   },
   mutations: {
     getPages(state, { razdel, pages }) {
-      console.log('Запущена мутация getPages. Пришел massiv: ', pages)
+      //console.log('Запущена мутация getPages. Пришел massiv: ', pages)
       state[razdel] = pages
     }
   },
   actions: {
     async getPages({ commit }, razdel) {
-      console.log('Запущено действие getPages. Пришел раздел: ', razdel);
+      //console.log('Запущено действие getPages. Пришел раздел: ', razdel);
       try {
         const pages = []
         const pagesRef = db.collection(razdel)
