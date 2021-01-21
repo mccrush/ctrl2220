@@ -35,7 +35,7 @@
     <div class="row">
       <div class="col">
         <textarea
-          row="4"
+          row="5"
           class="form-control"
           v-model="description"
           placeholder="Описание раздела, страницы, элемента"
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="form-group form-check mt-4">
+    <div class="form-group form-check mt-3">
       <input
         type="checkbox"
         class="form-check-input"
@@ -60,7 +60,7 @@
     <div class="row mb-3">
       <div class="col-12">
         <div class="form-group">
-          <label for="fileimage">Допустимые форматы: jpeg, png</label>
+          <label for="fileimage">Допустимые форматы: jpeg, png </label>
           <input
             type="file"
             accept="image/png, image/jpeg"
@@ -80,7 +80,7 @@
           <img :src="ims" class="img-thumbnail imgsize" />
           <button
             type="button"
-            class="btn btn-sm btn-light btn-block"
+            class="btn btn-sm btn-light w-100"
             @click="removeImage(index)"
           >
             Удалить
@@ -99,12 +99,12 @@
 
     <transition name="fade" mode="out-in">
       <h5 id="success" v-if="success">
-        <span class="badge badge-success p-2 pl-3 pr-3">{{ success }}</span>
+        <span class="badge badge-success p-2 ps-3 pe-3">{{ success }}</span>
       </h5>
     </transition>
     <transition name="fade" mode="out-in">
       <h5 id="error" v-if="error">
-        <span class="badge badge-danger p-2 pl-3 pr-3">{{ error }}</span>
+        <span class="badge badge-danger p-2 ps-3 pe-3">{{ error }}</span>
       </h5>
     </transition>
   </form>
@@ -197,7 +197,7 @@ export default {
         }
       } else {
         try {
-          this.$store.dispatch('createPage', element)
+          this.$store.dispatch('addElement', element)
           this.showSuccess('Сохранено')
           this.title = ''
           this.alias = ''
