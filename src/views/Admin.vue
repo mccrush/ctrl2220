@@ -3,15 +3,15 @@
     <vueHeadful title="Admin" description="Admin panel" />
     <div class="col-12 border-bottom border-top">
       <div class="row">
-        <div class="col-2 border-right">
+        <div class="col-2 border-end">
           <h6 class="text-center mt-2">Раздел</h6>
         </div>
-        <div class="col-2 border-right">
+        <div class="col-2 border-end">
           <h6 class="text-center mt-2">Элемент</h6>
         </div>
         <div class="col-2 p-0">
           <button
-            class="btn btn-success btn-sm btn-block rounded-0 h-100"
+            class="btn btn-success btn-sm rounded-0 h-100 w-100"
             @click="createElement"
             :disabled="!selectRazdelAlias"
           >
@@ -20,7 +20,7 @@
         </div>
         <div class="col-2 p-0">
           <button
-            class="btn btn-danger btn-sm btn-block rounded-0 h-100"
+            class="btn btn-danger btn-sm rounded-0 h-100 w-100"
             @click="deleteElement"
             :disabled="!selectRazdelAlias || !selectElementId"
           >
@@ -35,14 +35,14 @@
       </div>
     </div>
 
-    <div class="col-2 border-right p-0">
+    <div class="col-2 border-end p-0">
       <ListRazdel
         @select-razdel="selectRazdel"
         :currentId="selectRazdelId"
         :razdels="razdels"
       />
     </div>
-    <div class="col-2 border-right p-0">
+    <div class="col-2 border-end p-0">
       <div v-if="elements.length">
         <ListElement
           @select-element="selectElement"
