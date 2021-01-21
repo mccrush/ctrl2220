@@ -24,10 +24,10 @@
             placeholder="alias"
             v-model="alias"
           />
-          <small
-            id="aliasHelp"
-            class="form-text text-muted"
-          >Латинскими символами, с маленькой буквы, без пробелов и дефисов</small>
+          <small id="aliasHelp" class="form-text text-muted"
+            >Латинскими символами, с маленькой буквы, без пробелов и
+            дефисов</small
+          >
         </div>
       </div>
     </div>
@@ -44,27 +44,35 @@
     </div>
 
     <div class="form-group form-check mt-4">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="active" />
-      <label
-        class="form-check-label"
-        for="exampleCheck1"
-      >{{active ? 'Активна (будет отображаться)' : 'Не активна (не будет отображаться)'}}</label>
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="exampleCheck1"
+        v-model="active"
+      />
+      <label class="form-check-label" for="exampleCheck1">{{
+        active
+          ? 'Активна (будет отображаться)'
+          : 'Не активна (не будет отображаться)'
+      }}</label>
     </div>
 
     <button
       type="submit"
-      class="btn btn-primary btn-sm float-right shadow-sm"
+      class="btn btn-primary btn-sm float-right shadow-sm mt-2"
       :disabled="!title.length || !alias.length"
-    >Сохранить</button>
+    >
+      Сохранить
+    </button>
 
     <transition name="fade" mode="out-in">
       <h5 id="success" v-if="success">
-        <span class="badge badge-success p-2 pl-3 pr-3">{{success}}</span>
+        <span class="badge badge-success p-2 pl-3 pr-3">{{ success }}</span>
       </h5>
     </transition>
     <transition name="fade" mode="out-in">
       <h5 id="error" v-if="error">
-        <span class="badge badge-danger p-2 pl-3 pr-3">{{error}}</span>
+        <span class="badge badge-danger p-2 pl-3 pr-3">{{ error }}</span>
       </h5>
     </transition>
   </form>
@@ -73,7 +81,7 @@
 <script>
 export default {
   props: {
-    element: Object
+    element: Object,
   },
   data() {
     return {
@@ -83,7 +91,7 @@ export default {
       active: true,
       id: '',
       success: '',
-      error: ''
+      error: '',
     }
   },
   mounted() {
@@ -109,7 +117,7 @@ export default {
         description: this.description,
         active: this.active,
         razdel: 'napravs',
-        id: this.id || Date.now().toString()
+        id: this.id || Date.now().toString(),
       }
 
       if (this.id) {
@@ -122,7 +130,7 @@ export default {
         }
       } else {
         try {
-          this.$store.dispatch('createPage', element)
+          this.$store.dispatch('addElement', element)
           this.showSuccess('Сохранено')
           this.title = ''
           this.alias = ''
@@ -144,7 +152,7 @@ export default {
       setTimeout(() => {
         this.error = ''
       }, 4000)
-    }
+    },
   },
   watch: {
     element() {
@@ -161,8 +169,8 @@ export default {
         this.active = true
         this.id = ''
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -178,7 +186,8 @@ export default {
 .fade-leave-active {
   transition: opacity 0.3s ease;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
