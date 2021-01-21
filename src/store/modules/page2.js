@@ -10,13 +10,17 @@ export default {
   },
   mutations: {
     getPages(state, { razdel, pages }) {
-      //console.log('Запущена мутация getPages. Пришел massiv: ', pages)
       state[razdel] = pages
+    },
+    updateElement(state, element) {
+      const elements = state[element.razdel].concat()
+      const index = state[element.razdel].findIndex(elem => elem.id === element.id)
+      elements[index] = element
+      state[element.razdel] = elements
     }
   },
   actions: {
     async getPages({ commit }, razdel) {
-      //console.log('Запущено действие getPages. Пришел раздел: ', razdel);
       try {
         const pages = []
         const pagesRef = db.collection(razdel)
@@ -33,9 +37,18 @@ export default {
 
         commit('getPages', { razdel, pages })
       } catch (error) {
-        throw error
+        console.log('Ошибка при получении коллекции из БД, actions:getPages()', error)
       }
     },
+    async updateElement({ commit }, element) {
+      try {
+        const elementRef = db.collection(element.razdel).doc(element.id)
+        const res = await elementRef.update(element)
+        commit('updateElement', element)
+      } catch (error) {
+        console.log('Ошибка при обновлении элемента, actions:updateElement()', error)
+      }
+    }
   },
   getters: {
     napravById: state => id => state.napravs.find(naprav => naprav.id === id),
